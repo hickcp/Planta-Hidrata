@@ -24,7 +24,7 @@ public class PlantaInformacoesController {
     @PostMapping
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroInformacoes dados){
         var informacoes = new PlantaInformacoes(dados);
-        return ResponseEntity.ok( service.cadastrar(dados));
+        return ResponseEntity.ok(service.cadastrar(dados));
     }
 
 
