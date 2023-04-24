@@ -1,7 +1,7 @@
 package com.api.rega.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.api.rega.dto.DadosCadastroInformacoes;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,10 +14,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class PlantaInformacoes {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Long id_planta;
+
+    Long idPlanta;
+
     float luzSolar;
     float umidade;
     float temperatura;
     boolean regar;
+
+    public PlantaInformacoes(DadosCadastroInformacoes dados) {
+        this.idPlanta = dados.idPlanta();
+        this.luzSolar = dados.luzSolar();
+        this.umidade = dados.umidade();
+        this.temperatura = dados.temperatura();
+    }
 }
