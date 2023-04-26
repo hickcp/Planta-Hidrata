@@ -1,7 +1,7 @@
 CREATE TABLE Plantas (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
-  nomeCientifico VARCHAR(255) NOT NULL,
+  nome_cientifico VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
