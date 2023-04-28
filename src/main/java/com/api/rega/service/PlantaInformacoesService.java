@@ -3,7 +3,9 @@ package com.api.rega.service;
 import com.api.rega.dto.DadosCadastroInformacoes;
 import com.api.rega.dto.DadosDetalhamentoInformacoes;
 import com.api.rega.dto.DadosListagemInformacoes;
+import com.api.rega.dto.planta.PlantaDTO;
 import com.api.rega.dto.plantainfo.PlantaInfoDTO;
+import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.repository.PlantaInformacoesRepository;
 import com.api.rega.repository.PlantaRepository;
@@ -37,13 +39,15 @@ public class PlantaInformacoesService {
         return informacoes;
     }
 
-    public PlantaInfoDTO ultimoCadastrado() {
+    public PlantaDTO ultimoCadastrado() {
         Long ultimaPlantaId = plantaRepo.ultimaPlantaCadastrada();
-        Optional<PlantaInformacoes> plantaInfo = plantaInfoRepo.getByIdPlanta(ultimaPlantaId);
-        if (plantaInfo.isEmpty()) {
-            return new PlantaInfoDTO();
+        Optional<Planta> planta = plantaRepo.findById(ultimaPlantaId);
+        List<PlantaInformacoes> plantaInfos = plantaInfoRepo.findByPlantaId(ultimaPlantaId);
+        if (plantaInfos.isEmpty()) {
+            return new PlantaDTO();
         }
 
-        return new PlantaInfoDTO(plantaInfo.get());
+        List<PlantaInfoDTO> infos = plantaInfos.stream().map(p -> new PlantaInfoDTO(p)).toList();
+        return new PlantaDTO(planta.get(), infos);
     }
 }

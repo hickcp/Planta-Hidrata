@@ -1,6 +1,5 @@
 package com.api.rega.dto.plantainfo;
 
-import com.api.rega.dto.planta.PlantaDTO;
 import com.api.rega.entity.PlantaInformacoes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlantaInfoDTO {
 
-    private PlantaDTO planta;
     private Long id_planta_info;
     private Float luz_solar;
     private Float umidade;
@@ -23,7 +21,6 @@ public class PlantaInfoDTO {
     public PlantaInfoDTO() {}
 
     public PlantaInfoDTO(PlantaInformacoes plantaInfo) {
-        this.planta = new PlantaDTO(plantaInfo.getPlanta());
         this.id_planta_info = plantaInfo.getId();
         this.luz_solar = plantaInfo.getLuzSolar();
         this.umidade = plantaInfo.getUmidade();

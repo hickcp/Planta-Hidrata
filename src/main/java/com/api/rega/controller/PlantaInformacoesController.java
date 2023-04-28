@@ -2,7 +2,7 @@ package com.api.rega.controller;
 
 import com.api.rega.dto.DadosCadastroInformacoes;
 import com.api.rega.dto.DadosListagemInformacoes;
-import com.api.rega.dto.plantainfo.PlantaInfoDTO;
+import com.api.rega.dto.planta.PlantaDTO;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.service.PlantaInformacoesService;
 import jakarta.transaction.Transactional;
@@ -35,7 +35,7 @@ public class PlantaInformacoesController {
     }
 
     @GetMapping("ultimo-cadastrado")
-    public ResponseEntity<PlantaInfoDTO> ultimaPlantaCadastrada(){
+    public ResponseEntity<PlantaDTO> ultimaPlantaCadastrada(){
         return ResponseEntity.ok(service.ultimoCadastrado());
     }
 }
