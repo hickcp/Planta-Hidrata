@@ -11,7 +11,6 @@ import com.api.rega.repository.PlantaInformacoesRepository;
 import com.api.rega.repository.PlantaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
