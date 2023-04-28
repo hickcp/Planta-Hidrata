@@ -34,8 +34,11 @@ public class PlantaInformacoesController {
         return ResponseEntity.ok(service.listar());
     }
 
-    @GetMapping("ultimo-cadastrado")
-    public ResponseEntity<PlantaDTO> ultimaPlantaCadastrada(){
-        return ResponseEntity.ok(service.ultimoCadastrado());
+    @GetMapping("/{plantaId}")
+    public ResponseEntity<PlantaDTO> getInfoByPlantaId(
+            @PathVariable Long plantaId,
+            @RequestParam(required = false, defaultValue = "1") int limite) {
+
+        return ResponseEntity.ok(service.getInfoByPlantaId(plantaId, limite));
     }
 }

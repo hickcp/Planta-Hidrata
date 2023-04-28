@@ -10,6 +10,8 @@ import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.repository.PlantaInformacoesRepository;
 import com.api.rega.repository.PlantaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,10 +41,11 @@ public class PlantaInformacoesService {
         return informacoes;
     }
 
-    public PlantaDTO ultimoCadastrado() {
-        Long ultimaPlantaId = plantaRepo.ultimaPlantaCadastrada();
-        Optional<Planta> planta = plantaRepo.findById(ultimaPlantaId);
-        List<PlantaInformacoes> plantaInfos = plantaInfoRepo.findByPlantaId(ultimaPlantaId);
+    public PlantaDTO getInfoByPlantaId(Long plantaId, int limite) {
+        Optional<Planta> planta = plantaRepo.findById(plantaId);
+
+        PageRequest page = PageRequest.of(0, limite);
+        List<PlantaInformacoes> plantaInfos = plantaInfoRepo.getInfoByPlantaId(plantaId, page);
         if (plantaInfos.isEmpty()) {
             return new PlantaDTO();
         }
