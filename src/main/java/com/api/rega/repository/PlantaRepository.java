@@ -7,14 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PlantaRepository extends JpaRepository<Planta, Long> {
 
+
     @EntityGraph(attributePaths = "informacoes")
     @Query("""
             SELECT  p
             FROM Planta p
             INNER JOIN PlantaInformacoes pi
-            ON (p.id = pi.idPlanta)
+            ON (p.id = pi.planta.id)
             WHERE p.id = :idPlanta
-            AND pi.id = (SELECT MAX(id) FROM PlantaInformacoes WHERE idPlanta = :idPlanta ORDER BY pi.idPlanta ASC)
+            AND pi.id = (SELECT MAX(id) FROM PlantaInformacoes WHERE planta.id = :idPlanta ORDER BY pi.planta.id ASC)
             """)
     Planta buscarPlantaeInformacoes(Long idPlanta);
+
+    @Query("SELECT MAX(planta.id) FROM Planta planta")
+    Long ultimaPlantaCadastrada();
 }
