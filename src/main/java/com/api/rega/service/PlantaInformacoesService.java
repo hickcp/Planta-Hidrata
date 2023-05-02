@@ -18,6 +18,7 @@ public class PlantaInformacoesService {
 
     public DadosDetalhamentoInformacoes cadastrar(DadosCadastroInformacoes dados){
 
+
         var informacoes = new PlantaInformacoes(dados);
 
         repository.save(informacoes);

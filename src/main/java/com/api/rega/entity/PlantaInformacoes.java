@@ -17,17 +17,19 @@ public class PlantaInformacoes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    Long idPlanta;
+    private float luzSolar;
+    private float umidade;
+    private float temperatura;
+    private boolean regar;
 
-    float luzSolar;
-    float umidade;
-    float temperatura;
-    boolean regar;
+
+    @ManyToOne
+    @JoinColumn(name = "id_planta")
+    private Planta planta;
 
     public PlantaInformacoes(DadosCadastroInformacoes dados) {
-        this.idPlanta = dados.idPlanta();
         this.luzSolar = dados.luzSolar();
         this.umidade = dados.umidade();
         this.temperatura = dados.temperatura();

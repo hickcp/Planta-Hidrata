@@ -24,6 +24,6 @@ public class Planta {
     private String nome;
     private String nomeCientifico;
 
-    @OneToMany(mappedBy = "idPlanta")
-    private List<PlantaInformacoes> informacoes;
+    @OneToMany(mappedBy = "planta")
+    private List<PlantaInformacoes> informacoes = new ArrayList<>();
 }
