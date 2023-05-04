@@ -14,4 +14,11 @@ public interface PlantaInformacoesRepository extends JpaRepository<PlantaInforma
             "WHERE pi.planta.id = ?1 " +
             "ORDER BY pi.id DESC ")
     List<PlantaInformacoes> getInfoByPlantaId(Long plantaId, Pageable limit);
+
+    @Query("""
+            SELECT pi FROM PlantaInformacoes pi
+            WHERE pi.planta.id = :plantaId
+            AND pi.id = (SELECT MAX(pi2.id) FROM PlantaInformacoes pi2 WHERE pi2.planta.id = :plantaId)      
+            """)
+    PlantaInformacoes getLastInfoId(Long plantaId);
 }

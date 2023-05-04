@@ -1,5 +1,6 @@
 package com.api.rega.entity;
 
+import com.api.rega.dto.plantainfo.DadosCadastroRegar;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +32,5 @@ public class Planta {
     public Planta(Long idPlanta) {
         this.id = idPlanta;
     }
+
 }

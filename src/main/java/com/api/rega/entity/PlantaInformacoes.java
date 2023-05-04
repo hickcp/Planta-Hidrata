@@ -1,6 +1,7 @@
 package com.api.rega.entity;
 
 import com.api.rega.dto.DadosCadastroInformacoes;
+import com.api.rega.dto.plantainfo.DadosCadastroRegar;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,5 +40,11 @@ public class PlantaInformacoes {
         this.luzSolar = dados.luzSolar();
         this.umidade = dados.umidade();
         this.temperatura = dados.temperatura();
+    }
+
+
+
+    public void rega(DadosCadastroRegar dados){
+        this.regar = dados.regar();
     }
 }

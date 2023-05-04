@@ -1,8 +1,11 @@
 package com.api.rega.controller;
 
 import com.api.rega.dto.DadosCadastroInformacoes;
+import com.api.rega.dto.DadosDetalhamentoPlanta;
 import com.api.rega.dto.DadosListagemInformacoes;
 import com.api.rega.dto.planta.PlantaDTO;
+import com.api.rega.dto.plantainfo.DadosCadastroRegar;
+import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.service.PlantaInformacoesService;
 import jakarta.transaction.Transactional;
@@ -40,5 +43,13 @@ public class PlantaInformacoesController {
             @RequestParam(required = false, defaultValue = "1") int limite) {
 
         return ResponseEntity.ok(service.getInfoByPlantaId(plantaId, limite));
+    }
+
+    @PutMapping("/{plantaId}")
+    public ResponseEntity<DadosDetalhamentoPlanta> setRegar(
+            @PathVariable Long plantaId,
+            @RequestBody @Valid DadosCadastroRegar dados
+            ){
+        return ResponseEntity.ok(service.regar(plantaId, dados));
     }
 }

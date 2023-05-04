@@ -12,9 +12,5 @@ public class PlantaService {
     @Autowired
     PlantaRepository repository;
 
-    public DadosDetalhamentoPlantaEInformacoes plantaEInformacoes(Long id){
-        var planta = repository.buscarPlantaeInformacoes(id);
-        var detalhes = new DadosDetalhamentoPlantaEInformacoes(planta);
-        return detalhes;
-    }
+
 }
