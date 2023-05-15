@@ -1,4 +1,4 @@
-package com.api.rega.dto;
+package com.api.rega.dto.plantainfo;
 
 import jakarta.validation.constraints.NotNull;
 

@@ -1,4 +1,4 @@
-package com.api.rega.dto;
+package com.api.rega.dto.plantainfo;
 
 import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
