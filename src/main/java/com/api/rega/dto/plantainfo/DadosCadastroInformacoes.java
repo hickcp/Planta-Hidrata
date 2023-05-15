@@ -8,13 +8,13 @@ public record DadosCadastroInformacoes(
         Long idPlanta,
 
         @NotNull
-        float luzSolar,
+        Float luzSolar,
 
         @NotNull
-        float umidade,
+        Float umidade,
 
         @NotNull
-        float temperatura
+        Float temperatura
 
 
 ) {
