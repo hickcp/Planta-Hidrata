@@ -1,11 +1,10 @@
 package com.api.rega.controller;
 
-import com.api.rega.dto.DadosCadastroInformacoes;
-import com.api.rega.dto.DadosDetalhamentoPlanta;
-import com.api.rega.dto.DadosListagemInformacoes;
+import com.api.rega.dto.plantainfo.DadosCadastroInformacoes;
+import com.api.rega.dto.plantainfo.DadosDetalhamentoPlanta;
+import com.api.rega.dto.plantainfo.DadosListagemInformacoes;
 import com.api.rega.dto.planta.PlantaDTO;
 import com.api.rega.dto.plantainfo.DadosCadastroRegar;
-import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.service.PlantaInformacoesService;
 import jakarta.transaction.Transactional;

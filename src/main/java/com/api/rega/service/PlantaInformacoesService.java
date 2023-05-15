@@ -1,9 +1,9 @@
 package com.api.rega.service;
 
-import com.api.rega.dto.DadosCadastroInformacoes;
-import com.api.rega.dto.DadosDetalhamentoInformacoes;
-import com.api.rega.dto.DadosDetalhamentoPlanta;
-import com.api.rega.dto.DadosListagemInformacoes;
+import com.api.rega.dto.plantainfo.DadosCadastroInformacoes;
+import com.api.rega.dto.plantainfo.DadosDetalhamentoInformacoes;
+import com.api.rega.dto.plantainfo.DadosDetalhamentoPlanta;
+import com.api.rega.dto.plantainfo.DadosListagemInformacoes;
 import com.api.rega.dto.planta.PlantaDTO;
 import com.api.rega.dto.plantainfo.DadosCadastroRegar;
 import com.api.rega.dto.plantainfo.PlantaInfoDTO;
@@ -11,6 +11,7 @@ import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.repository.PlantaInformacoesRepository;
 import com.api.rega.repository.PlantaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,10 @@ public class PlantaInformacoesService {
     private PlantaRepository plantaRepo;
 
     public DadosDetalhamentoInformacoes cadastrar(DadosCadastroInformacoes dados){
-
+        System.out.println(dados.idPlanta());
+        System.out.println(dados.temperatura());
+        System.out.println(dados.luzSolar());
+        System.out.println(dados.umidade());
         var informacoes = new PlantaInformacoes(dados);
 
         plantaInfoRepo.save(informacoes);
@@ -48,7 +52,7 @@ public class PlantaInformacoesService {
         PageRequest page = PageRequest.of(0, limite);
         List<PlantaInformacoes> plantaInfos = plantaInfoRepo.getInfoByPlantaId(plantaId, page);
         if (plantaInfos.isEmpty()) {
-            return new PlantaDTO();
+            throw new EntityNotFoundException();
         }
 
         List<PlantaInfoDTO> infos = plantaInfos.stream().map(p -> new PlantaInfoDTO(p)).toList();
@@ -57,6 +61,9 @@ public class PlantaInformacoesService {
 
     public DadosDetalhamentoPlanta regar(Long plantaId, DadosCadastroRegar dados){
         PlantaInformacoes informacoes = plantaInfoRepo.getLastInfoId(plantaId);
+        if (informacoes == null){
+            throw new EntityNotFoundException();
+        }
         informacoes.rega(dados);
         Planta planta = plantaRepo.getReferenceById(plantaId);
 

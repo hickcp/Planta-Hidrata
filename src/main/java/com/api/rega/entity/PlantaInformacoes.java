@@ -1,6 +1,6 @@
 package com.api.rega.entity;
 
-import com.api.rega.dto.DadosCadastroInformacoes;
+import com.api.rega.dto.plantainfo.DadosCadastroInformacoes;
 import com.api.rega.dto.plantainfo.DadosCadastroRegar;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
