@@ -29,10 +29,6 @@ public class PlantaInformacoesService {
     private PlantaRepository plantaRepo;
 
     public DadosDetalhamentoInformacoes cadastrar(DadosCadastroInformacoes dados){
-        System.out.println(dados.idPlanta());
-        System.out.println(dados.temperatura());
-        System.out.println(dados.luzSolar());
-        System.out.println(dados.umidade());
         var informacoes = new PlantaInformacoes(dados);
 
         plantaInfoRepo.save(informacoes);
