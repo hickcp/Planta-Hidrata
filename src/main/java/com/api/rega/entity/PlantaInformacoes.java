@@ -44,7 +44,4 @@ public class PlantaInformacoes {
 
 
 
-    public void rega(DadosCadastroRegar dados){
-        this.regar = dados.regar();
-    }
 }
