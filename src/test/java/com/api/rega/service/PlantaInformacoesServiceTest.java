@@ -1,7 +1,9 @@
 package com.api.rega.service;
 
 
+import com.api.rega.dto.plantainfo.DadosCadastroInformacoes;
 import com.api.rega.dto.plantainfo.DadosCadastroRegar;
+import com.api.rega.dto.plantainfo.DadosDetalhamentoInformacoes;
 import com.api.rega.dto.plantainfo.DadosListagemInformacoes;
 import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
@@ -105,6 +107,21 @@ public class PlantaInformacoesServiceTest {
         Assertions.assertEquals(response.temperatura(), plantaInfo.getTemperatura());
         Assertions.assertEquals(response.umidade(), plantaInfo.getUmidade());
         Assertions.assertEquals(response.regar(), dadosRegar.regar());
+    }
+
+    @Test
+    public void testCadastrarInfo(){
+        var plantaDTO = new DadosCadastroInformacoes(1l, 10f, 100f, 14f);
+        var plantaInfo = new PlantaInformacoes(plantaDTO);
+
+        Mockito.when(plantaInformacoesRepo.save(Mockito.any(PlantaInformacoes.class))).thenReturn(plantaInfo);
+        var response = plantaInformacoesSvc.cadastrar(plantaDTO);
+
+        Assertions.assertEquals(response.id(), plantaInfo.getId());
+        Assertions.assertEquals(response.luzSolar(), plantaInfo.getLuzSolar());
+        Assertions.assertEquals(response.temperatura(), plantaInfo.getTemperatura());
+        Assertions.assertEquals(response.umidade(), plantaInfo.getUmidade());
+        Assertions.assertEquals(response.idPlanta(), plantaInfo.getPlanta().getId());
     }
 
 }
