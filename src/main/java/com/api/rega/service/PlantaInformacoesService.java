@@ -60,7 +60,8 @@ public class PlantaInformacoesService {
         if (informacoes == null){
             throw new EntityNotFoundException();
         }
-        informacoes.rega(dados);
+        informacoes.setRegar(dados.regar());
+        PlantaInformacoes newInfo = plantaInfoRepo.save(informacoes);
         Planta planta = plantaRepo.getReferenceById(plantaId);
 
         return new DadosDetalhamentoPlanta(planta, informacoes);
