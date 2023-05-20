@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="planta_informacoes")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlantaInformacoes {
