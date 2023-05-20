@@ -66,7 +66,7 @@ public class PlantaInformacoesServiceTest {
 
         List<PlantaInformacoes> infos = Stream.of(dado1,dado2,dado3).toList();
 
-        Optional<Planta> plantaOptional = Optional.of(new Planta(1L,"Rosa","Rosa", null));
+        Optional<Planta> plantaOptional = Optional.of(planta1);
         Mockito.when(plantaRepo.findById(Mockito.anyLong())).thenReturn(plantaOptional);
 
         PageRequest page = PageRequest.of(0, 1);
