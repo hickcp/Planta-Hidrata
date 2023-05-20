@@ -38,7 +38,9 @@ public class PlantaInformacoesService {
 
     public List<DadosListagemInformacoes> listar(){
         var informacoes = plantaInfoRepo.findAll().stream().map(DadosListagemInformacoes::new).toList();
-
+        if(informacoes.isEmpty()){
+            throw new EntityNotFoundException();
+        }
         return informacoes;
     }
 
