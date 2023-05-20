@@ -74,14 +74,16 @@ public class PlantaInformacoesServiceTest {
 
         var response = plantaInformacoesSvc.getInfoByPlantaId(1L, 1);
 
-        int i = 0;
+        for (int i = 0; i < response.getInformacoes().size(); i++) {
+            PlantaInformacoes info = infos.get(i);
 
-        for (PlantaInformacoes info : infos) {
+            Assertions.assertEquals(info.getPlanta().getId(), response.getId_planta());
+            Assertions.assertEquals(info.getPlanta().getNome(), response.getNome());
+            Assertions.assertEquals(info.getPlanta().getNomeCientifico(), response.getNome_cientifico());
             Assertions.assertEquals(info.getId(), response.getInformacoes().get(i).getId_planta_info());
             Assertions.assertEquals(info.getLuzSolar(), response.getInformacoes().get(i).getLuz_solar());
             Assertions.assertEquals(info.getUmidade(), response.getInformacoes().get(i).getUmidade());
             Assertions.assertEquals(info.getTemperatura(), response.getInformacoes().get(i).getTemperatura());
-            i++;
         }
     }
 
