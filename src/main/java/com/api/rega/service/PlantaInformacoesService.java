@@ -29,10 +29,6 @@ public class PlantaInformacoesService {
     private PlantaRepository plantaRepo;
 
     public DadosDetalhamentoInformacoes cadastrar(DadosCadastroInformacoes dados){
-        System.out.println(dados.idPlanta());
-        System.out.println(dados.temperatura());
-        System.out.println(dados.luzSolar());
-        System.out.println(dados.umidade());
         var informacoes = new PlantaInformacoes(dados);
 
         plantaInfoRepo.save(informacoes);
@@ -42,7 +38,9 @@ public class PlantaInformacoesService {
 
     public List<DadosListagemInformacoes> listar(){
         var informacoes = plantaInfoRepo.findAll().stream().map(DadosListagemInformacoes::new).toList();
-
+        if(informacoes.isEmpty()){
+            throw new EntityNotFoundException();
+        }
         return informacoes;
     }
 
@@ -64,7 +62,8 @@ public class PlantaInformacoesService {
         if (informacoes == null){
             throw new EntityNotFoundException();
         }
-        informacoes.rega(dados);
+        informacoes.setRegar(dados.regar());
+        PlantaInformacoes newInfo = plantaInfoRepo.save(informacoes);
         Planta planta = plantaRepo.getReferenceById(plantaId);
 
         return new DadosDetalhamentoPlanta(planta, informacoes);

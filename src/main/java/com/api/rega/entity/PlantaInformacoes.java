@@ -6,10 +6,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="planta_informacoes")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlantaInformacoes {
@@ -44,7 +46,4 @@ public class PlantaInformacoes {
 
 
 
-    public void rega(DadosCadastroRegar dados){
-        this.regar = dados.regar();
-    }
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/planta")
-@Transactional
 public class PlantaController {
 
     @Autowired

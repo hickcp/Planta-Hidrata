@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Transactional
 @RequestMapping("informacoes")
 public class PlantaInformacoesController {
 
@@ -43,7 +42,7 @@ public class PlantaInformacoesController {
 
         return ResponseEntity.ok(service.getInfoByPlantaId(plantaId, limite));
     }
-
+    @Transactional
     @PutMapping("/{plantaId}")
     public ResponseEntity<DadosDetalhamentoPlanta> setRegar(
             @PathVariable Long plantaId,
