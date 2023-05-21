@@ -1,28 +1,38 @@
 package com.api.rega.entity;
 
+import com.api.rega.dto.plantainfo.DadosCadastroRegar;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Table(name = "plantas")
-@Entity(name = "Planta")
+@Entity
+@Table(name="plantas")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Planta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Column(name = "nome_cientifico", nullable = false)
     private String nomeCientifico;
 
-    @OneToMany(mappedBy = "idPlanta")
+    @OneToMany(mappedBy = "planta")
     private List<PlantaInformacoes> informacoes;
+
+    public Planta(Long idPlanta) {
+        this.id = idPlanta;
+    }
+
 }
