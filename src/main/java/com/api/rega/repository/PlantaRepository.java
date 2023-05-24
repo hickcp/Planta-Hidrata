@@ -8,4 +8,5 @@ public interface PlantaRepository extends JpaRepository<Planta, Long> {
 
     @Query("SELECT MAX(planta.id) FROM Planta planta")
     Long ultimaPlantaCadastrada();
+
 }
