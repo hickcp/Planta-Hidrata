@@ -33,8 +33,7 @@ class PlantaServiceTest {
         Planta dado4 = new Planta(1L,"Samambaia","Samambaia",null);
 
         List<Planta> plantas = Stream.of(dado1, dado2, dado3, dado4).toList();
-        List<Planta> vazio = new ArrayList<Planta>();
-        Mockito.when(repo.findAll()).thenReturn(vazio);
+        Mockito.when(repo.findAll()).thenReturn(plantas);
 
         List<DadosPlantaNome> response = svc.getNomes();
 
