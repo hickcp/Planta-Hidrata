@@ -9,6 +9,7 @@ import com.api.rega.entity.Planta;
 import com.api.rega.entity.PlantaInformacoes;
 import com.api.rega.repository.PlantaInformacoesRepository;
 import com.api.rega.repository.PlantaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.h2.table.Plan;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -59,6 +60,15 @@ public class PlantaInformacoesServiceTest {
     }
 
     @Test
+    public void testListarInformacoesVazio(){
+
+        List<PlantaInformacoes> infos = new ArrayList<>();
+        Mockito.when(plantaInformacoesRepo.findAll()).thenReturn(infos);
+
+        Assertions.assertThrows(EntityNotFoundException.class, () -> plantaInformacoesSvc.listar());
+    }
+
+    @Test
     public void testGetInfoByPlantaId(){
 
         Planta planta1 = new Planta(1L,"Rosa","Rosa", null);
@@ -87,6 +97,44 @@ public class PlantaInformacoesServiceTest {
             Assertions.assertEquals(info.getUmidade(), response.getInformacoes().get(i).getUmidade());
             Assertions.assertEquals(info.getTemperatura(), response.getInformacoes().get(i).getTemperatura());
         }
+    }
+
+    @Test
+    public void testGetInfoByPlantaIdInformacaoVazio(){
+
+        Planta planta1 = new Planta(1L,"Rosa","Rosa", null);
+        List<PlantaInformacoes> infos = new ArrayList<>();
+
+        Optional<Planta> plantaOptional = Optional.of(planta1);
+        Mockito.when(plantaRepo.findById(Mockito.anyLong())).thenReturn(plantaOptional);
+
+        PageRequest page = PageRequest.of(0, 1);
+        Mockito.when(plantaInformacoesRepo.getInfoByPlantaId(1L,page)).thenReturn(infos);
+
+
+        Assertions.assertThrows(EntityNotFoundException.class, () ->
+                plantaInformacoesSvc.getInfoByPlantaId(1L, 1));
+    }
+
+    @Test
+    public void testGetInfoByPlantaIdPlantaVazio(){
+        Planta planta1 = new Planta();
+
+        var dado1 = new PlantaInformacoes(1L,planta1,30,100,14,false);
+        var dado2 = new PlantaInformacoes(2L,planta1,150,39,32,false);
+        var dado3 = new PlantaInformacoes(3L,planta1,100,80,27,false);
+        List<PlantaInformacoes> infos = Stream.of(dado1,dado2,dado3).toList();
+
+        Optional<Planta> plantaOptional = Optional.empty();
+
+        Mockito.when(plantaRepo.findById(Mockito.anyLong())).thenReturn(plantaOptional);
+
+        PageRequest page = PageRequest.of(0, 1);
+        Mockito.when(plantaInformacoesRepo.getInfoByPlantaId(1L,page)).thenReturn(infos);
+
+
+        Assertions.assertThrows(EntityNotFoundException.class, () ->
+                plantaInformacoesSvc.getInfoByPlantaId(1L, 1));
     }
 
     @Test

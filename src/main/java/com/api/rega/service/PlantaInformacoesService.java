@@ -49,7 +49,7 @@ public class PlantaInformacoesService {
 
         PageRequest page = PageRequest.of(0, limite);
         List<PlantaInformacoes> plantaInfos = plantaInfoRepo.getInfoByPlantaId(plantaId, page);
-        if (plantaInfos.isEmpty()) {
+        if (plantaInfos.isEmpty() || planta.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
